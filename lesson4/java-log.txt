@@ -1,0 +1,20 @@
+Script started on 2024-07-01 18:31:05+03:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="271" LINES="74"]
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ exitkill %1[2Ptop &ps -F[Ktopexit[1Ptop[1Pps -Ftop &kill %1[3Pexit[Kexitkill %1[2Ptop &ps -F[Ktopexitsudo cat modules.conf [C[C[C[C[C[C[C[C[C[C[C[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kcd /etc/modules-load.d/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kjava -version
+java version "17.0.11" 2024-04-16 LTS
+Java(TM) SE Runtime Environment (build 17.0.11+7-LTS-207)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.11+7-LTS-207, mixed mode, sharing)
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ update [K-java-alternatives --list
+jdk-17-oracle-x64              285302784  /usr/lib/jvm/jdk-17-oracle-x64
+jdk-22-oracle-x64              369106944  /usr/lib/jvm/jdk-22-oracle-x64
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ update-java-alternatives --list[K[K[K[Kset[Kt jdk-22-oracle-x64 
+update-java-alternatives: no root privileges
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ update-java-alternatives --set jdk-22-oracle-x64 [1@s[C[1@u[1@d[1@o[1@ 
+[sudo] password for alex: 
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ sudo update-java-alternatives --set jdk-22-oracle-x64 [C[C[C[C[C[C[C[C[C[C[C[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clist[K[C[C[C[C[C[C[C[C[C[C[C[18Pjava -version
+java version "22.0.1" 2024-04-16
+Java(TM) SE Runtime Environment (build 22.0.1+8-16)
+Java HotSpot(TM) 64-Bit Server VM (build 22.0.1+8-16, mixed mode, sharing)
+]0;alex@vm: ~[01;32malex@vm[00m:[01;34m~[00m$ exit
+exit
+
+Script done on 2024-07-01 18:32:18+03:00 [COMMAND_EXIT_CODE="0"]
