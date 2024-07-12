@@ -1,0 +1,27 @@
+ENV['VAGRANT_SERVER_URL'] = 'https://vagrant.elab.pro'
+
+Vagrant.configure(2) do |config|
+    
+    config.vm.box = "ubuntu/20.04"
+    config.ssh.insert_key = false
+  
+    config.vm.define "client" do |subconfig|
+      subconfig.vm.provider "virtualbox" do |vb|
+        vb.name = "client"
+      end
+      subconfig.vm.hostname = "client"
+      subconfig.vm.network "private_network", ip: "192.168.56.42"
+      subconfig.vm.provision "key", type: "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
+    end
+  
+    config.vm.define "server" do |subconfig|
+      subconfig.vm.provider "virtualbox" do |vb|
+        vb.name = "server"
+      end
+      subconfig.vm.hostname = "server"
+      subconfig.vm.network "private_network", ip: "192.168.56.41"
+      subconfig.vm.provision "pub", type: "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
+      subconfig.vm.provision "add", type: "shell", path: "./ssh.sh"
+    end
+   
+  end
