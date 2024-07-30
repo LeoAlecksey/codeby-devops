@@ -1,0 +1,7 @@
+[dev]
+dev ansible_host=192.168.56.51
+[dev:vars]
+ansible_ssh_user=vagrant
+ansible_become=yes
+ansible_become_method=sudo
+env_name=dev
