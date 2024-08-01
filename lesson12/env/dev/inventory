@@ -1,6 +1,6 @@
 [servers]
-dev ansible_host=192.168.56.51
-prod ansible_host=192.168.56.52
+server1 ansible_host=192.168.56.51
+
 [servers:vars]
 ansible_ssh_user=vagrant
 ansible_become=yes
