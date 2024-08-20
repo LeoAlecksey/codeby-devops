@@ -1,0 +1,43 @@
+Script started on 2024-08-20 19:30:11+03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="225" LINES="16"]
+[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# exitdocker network lsexit[Kdocker-compose rm[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K./network.sh 
+[?2004l9552846d4684d28c228edbe6366af4d9d535d6afb23beeca35443ff53b889fe8
+wp-db
+wp-data
+[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# ./network.sh exit[Kdocker network lsexit[Kdocker-compose rm[K[Kupdown --remove-orphansup[K
+[?2004lCreating network "lesson17_default" with the default driver
+Creating lesson17_wordpress_1 ... 
+Creating lesson17_db_1        ... 
+[1A[2KCreating lesson17_db_1        ... [32mdone[0m[1B[2A[2KCreating lesson17_wordpress_1 ... [32mdone[0m[2BAttaching to lesson17_db_1, lesson17_wordpress_1
+[36mdb_1         |[0m 2024-08-20 16:30:47+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.39-1.el9 started.
+[36mdb_1         |[0m 2024-08-20 16:30:47+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+[36mdb_1         |[0m 2024-08-20 16:30:47+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.39-1.el9 started.
+[33mwordpress_1  |[0m AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.22.0.3. Set the 'ServerName' directive globally to suppress this message
+[33mwordpress_1  |[0m AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.22.0.3. Set the 'ServerName' directive globally to suppress this message
+[33mwordpress_1  |[0m [Tue Aug 20 16:30:47.402152 2024] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.61 (Debian) PHP/8.2.22 configured -- resuming normal operations
+[33mwordpress_1  |[0m [Tue Aug 20 16:30:47.402220 2024] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[36mdb_1         |[0m '/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+[36mdb_1         |[0m 2024-08-20T16:30:47.622907Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+[36mdb_1         |[0m 2024-08-20T16:30:47.624823Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.39) starting as process 1
+[36mdb_1         |[0m 2024-08-20T16:30:47.631584Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+[36mdb_1         |[0m 2024-08-20T16:30:47.834374Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+[36mdb_1         |[0m 2024-08-20T16:30:48.086004Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[36mdb_1         |[0m 2024-08-20T16:30:48.086061Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+[36mdb_1         |[0m 2024-08-20T16:30:48.091940Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[36mdb_1         |[0m 2024-08-20T16:30:48.120530Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+[36mdb_1         |[0m 2024-08-20T16:30:48.120725Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.39'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping lesson17_wordpress_1 ... 
+Stopping lesson17_db_1        ... 
+^[[A^[[A[2A[2KStopping lesson17_wordpress_1 ... [32mdone[0m[2B[1A[2KStopping lesson17_db_1        ... [32mdone[0m[1B[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# docker-compose up[4P./network.sh [K[8Pexitdocker network lsexit[K./network.sh[8Pexitdocker network lsexit[Kdocker-compose rm[K[Kstart
+[?2004lStarting wordpress ... 
+Starting db        ... 
+[1A[2KStarting db        ... [32mdone[0m[1B[2A[2KStarting wordpress ... [32mdone[0m[2B[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# docker network connect my-net my-nginx[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kwp-net [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcontainert[K ls
+[?2004lCONTAINER ID   IMAGE       COMMAND                  CREATED              STATUS          PORTS                                   NAMES
+f0e14c9b7d47   wordpress   "docker-entrypoint.s…"   About a minute ago   Up 33 seconds   0.0.0.0:8080->80/tcp, :::8080->80/tcp   lesson17_wordpress_1
+691beff6ffad   mysql:8.0   "docker-entrypoint.s…"   About a minute ago   Up 33 seconds   3306/tcp, 33060/tcp                     lesson17_db_1
+[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# docker container ls-compose start[3Pup[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kdocker network connect my-net my-nginx[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kwp-net less[K[K[K[Klesson17_wordpress_1
+[?2004l[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# docker network connect wp-net lesson17_wordpress_1[1P_1[1P_1[1P_1[1P_1[1P_1[1P_1[1P_1[1P_1[1P_1d_1b_1
+[?2004l[?2004h]0;root@DESKTOP-7N9E6VQ: /mnt/c/Users/Alex/Desktop/Labs/lesson17root@DESKTOP-7N9E6VQ:/mnt/c/Users/Alex/Desktop/Labs/lesson17# exit
+[?2004lexit
+
+Script done on 2024-08-20 19:32:34+03:00 [COMMAND_EXIT_CODE="0"]
