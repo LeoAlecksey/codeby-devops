@@ -26,6 +26,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-storage
   resources:
     requests:
       storage: 20Gi
@@ -55,34 +56,32 @@ spec:
       containers:
       - image: mysql:8.0
         name: mysql
-        # environment:
-        #   MYSQL_DATABASE: exampledb
-        #   MYSQL_USER: exampleuser
-        #   MYSQL_PASSWORD: examplepass
-        #   MYSQL_RANDOM_ROOT_PASSWORD: '1'
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: '1'
-          #  valueFrom:
-          #    secretKeyRef:
-          #      name: mysql-pass
-          #      key: password
           - name: MYSQL_DATABASE
             value: wordpress
           - name: MYSQL_USER
             value: wordpress
           - name: MYSQL_PASSWORD
             value: examplepass
-        # #     secretKeyRef:
-        # #       name: mysql-pass
-        # #       key: password
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage
+        - name: pv-db-local
           mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-persistent-storage
+      - name: pv-db-local
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+      affinity:
+        podAntiAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             - labelSelector:
+                 matchExpressions:
+                   - key: "app"
+                     operator: In
+                     values:
+                     - minikube-m02
+               topologyKey: "kubernetes.io/hostname"

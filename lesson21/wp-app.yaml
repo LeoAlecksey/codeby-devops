@@ -27,6 +27,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-storage
   resources:
     requests:
       storage: 20Gi
@@ -66,9 +67,19 @@ spec:
         - containerPort: 80
           name: wordpress
         volumeMounts:
-        - name: wordpress-persistent-storage
+        - name: pv-wp-local
           mountPath: /var/www/html
       volumes:
-      - name: wordpress-persistent-storage
+      - name: pv-wp-local
         persistentVolumeClaim:
           claimName: wp-pv-claim
+      affinity:
+        podAntiAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             - labelSelector:
+                 matchExpressions:
+                   - key: "app"
+                     operator: In
+                     values:
+                     - minikube-m03
+               topologyKey: "kubernetes.io/hostname"

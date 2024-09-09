@@ -3,5 +3,7 @@
 #   literals:
 #   - password=examplepass
 resources:
+  - namespace.yaml
+  - pv.yaml
   - wp-db.yaml
   - wp-app.yaml
