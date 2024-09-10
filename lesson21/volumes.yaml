@@ -11,14 +11,14 @@ metadata:
   name: pv-db
 spec:
   capacity:
-    storage: 20Gi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
   storageClassName: local-storage
   local: 
-    path /mnt/db
+    path: /mnt/db
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -34,14 +34,14 @@ metadata:
   name: pv-wp
 spec:
   capacity:
-    storage: 20Gi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
   storageClassName: local-storage
   local: 
-    path /mnt/wp
+    path: /mnt/wp
   nodeAffinity:
     required:
       nodeSelectorTerms:
