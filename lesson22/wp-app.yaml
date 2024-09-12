@@ -34,6 +34,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
+  namespace: dev
   labels:
     app: wordpress
   
@@ -60,10 +61,8 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
           limits:
-            memory: 100Mi
-            cpu: 100m
+            cpu: 300m
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
@@ -97,6 +96,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: wordpress
+  namespace: dev
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

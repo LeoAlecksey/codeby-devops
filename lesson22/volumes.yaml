@@ -15,10 +15,10 @@ spec:
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Recycle
   storageClassName: local-storage
   local: 
-    path: /mnt/db
+    path: /data
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -38,10 +38,10 @@ spec:
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Recycle
   storageClassName: local-storage
   local: 
-    path: /mnt/wp
+    path: /data
   nodeAffinity:
     required:
       nodeSelectorTerms:
