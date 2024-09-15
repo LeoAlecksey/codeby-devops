@@ -34,17 +34,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
+  namespace: dev
   labels:
     app: wordpress
   
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: wordpress
       tier: frontend
   strategy:
-    type: Recreate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -54,6 +57,11 @@ spec:
       containers:
       - image: wordpress:6.2.1-apache
         name: wordpress
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 300m
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
@@ -82,3 +90,23 @@ spec:
                      values:
                      - minikube-m03
                topologyKey: "kubernetes.io/hostname"
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: wordpress
+  namespace: dev
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: wordpress
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
