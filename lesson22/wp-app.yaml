@@ -39,7 +39,6 @@ metadata:
     app: wordpress
   
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: wordpress
