@@ -58,9 +58,9 @@ spec:
           - name: MYSQL_ROOT_PASSWORD
             value: '1'
           - name: MYSQL_DATABASE
-            value: wordpress
+            value: exampledb
           - name: MYSQL_USER
-            value: wordpress
+            value: exampleuser
           - name: MYSQL_PASSWORD
             value: examplepass
         ports:
