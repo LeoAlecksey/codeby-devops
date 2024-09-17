@@ -55,13 +55,17 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:6.2.1-apache
+      - image: wordpress:latest
         name: wordpress
         resources:
           requests:
             cpu: 100m
           limits:
             cpu: 300m
+        securityContext:   # This is what wglambert referring to 
+          sysctls:               # Will add a sysctl in variable to your container
+          - name: net.ipv4.ip_unprivileged_port_start   # You will modify the this parameter 
+            value: "0"    
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
