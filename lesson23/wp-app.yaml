@@ -1,21 +1,17 @@
+
 apiVersion: v1
 kind: Service
 metadata:
   name: wordpress
-  labels:
-    app: wordpress
   namespace: dev
 spec:
-  selector:
-    app: wordpress
-    tier: frontend
   type: NodePort
   ports:
-  - name: wordpress
-    protocol: TCP
-    port: 8080
-    targetPort: 80
-    nodePort: 30100
+    - port: 8880
+      targetPort: 80
+      nodePort: 30100
+  selector:
+    app: wordpress
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,26 +19,22 @@ metadata:
   name: wp-pv-claim
   namespace: dev
 spec:
+  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-storage
   resources:
     requests:
-      storage: 2Gi
+      storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress
   namespace: dev
-  labels:
-    app: wordpress
-  
 spec:
   selector:
     matchLabels:
       app: wordpress
-      tier: frontend
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -52,11 +44,12 @@ spec:
     metadata:
       labels:
         app: wordpress
-        tier: frontend
     spec:
       containers:
-      - image: wordpress:6.2.1-apache
-        name: wordpress
+      - name: wordpress
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
         resources:
           requests:
             cpu: 100m
@@ -64,32 +57,30 @@ spec:
             cpu: 300m
         env:
         - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
-        - name: WORDPRESS_DB_PASSWORD
-          value: examplepass
+          value: "mysql:3306"
+        - name: WORDPRESS_DB_NAME
+          value: "exampledb"
         - name: WORDPRESS_DB_USER
-          value: wordpress
-        ports:
-        - containerPort: 80
-          name: wordpress
+          value: "exampleuser"
+        - name: WORDPRESS_DB_PASSWORD
+          value: "examplepass"
         volumeMounts:
-        - name: pv-wp-local
+        - name: ps-wp
           mountPath: /var/www/html
-      restartPolicy: Always
       volumes:
-      - name: pv-wp-local
+      - name: ps-wp
         persistentVolumeClaim:
           claimName: wp-pv-claim
       affinity:
         podAntiAffinity:
-           requiredDuringSchedulingIgnoredDuringExecution:
-             - labelSelector:
-                 matchExpressions:
-                   - key: "app"
-                     operator: In
-                     values:
-                     - minikube-m03
-               topologyKey: "kubernetes.io/hostname"
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - minikube-m03
+              topologyKey: "kubernetes.io/hostname"
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
