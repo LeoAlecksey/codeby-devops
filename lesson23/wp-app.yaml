@@ -48,6 +48,8 @@ spec:
       containers:
       - name: wordpress
         image: wordpress:latest
+        command: ["/bin/bash"]
+        args: ["-c", "echo 'ServerName localhost' >> /etc/apache2/apache2.conf"]
         ports:
         - containerPort: 80
         resources:
