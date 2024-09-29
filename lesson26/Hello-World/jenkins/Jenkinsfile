@@ -1,8 +1,6 @@
 pipeline {
     agent { 
         node { label 'maven' } }
-    options {
-        rateLimitBuilds(throttle: [count: 10000, durationName: 'day', durationCount: 1])
     stages {
         stage('Build') {
             //steps {
