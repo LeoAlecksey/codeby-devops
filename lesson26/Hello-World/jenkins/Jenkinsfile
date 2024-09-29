@@ -3,9 +3,9 @@ pipeline {
         node { label 'maven' } }
     stages {
         stage('Build') {
-            steps {
-                sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
-            }
+            //steps {
+            //    sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
+            //}
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
