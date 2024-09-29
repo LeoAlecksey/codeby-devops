@@ -1,19 +1,24 @@
 pipeline {
     agent { 
         node { label 'maven' } }
+    environment {
+        APP_WORLD = "lesson26/Hellow-Devops"
+    }
     stages {
         stage('Build') {
-            //steps {
-            //    sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
-            //}
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                dir(env.APP_WORLD) {
+                    sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
+                    sh 'mvn -B -DskipTests clean package'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir(env.APP_WORLD) {
+                    sh 'mvn test'
             }
+            
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
