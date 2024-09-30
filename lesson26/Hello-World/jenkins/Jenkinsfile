@@ -2,7 +2,7 @@ pipeline {
     agent { 
         node { label 'maven' } }
     environment {
-        APP_WORLD = "lesson26/Hellow-World"
+        APP_WORLD = "lesson26/Hello-World"
     }
     stages {
         stage('Build') {
