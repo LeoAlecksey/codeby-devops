@@ -1,20 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.9'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent { 
+        node { label 'maven' } }
     environment {
         APP_WORLD = "lesson26/Hello-World"
     }
     stages {
         stage('Build') {
             steps {
-                //dir(env.APP_WORLD) {
+                dir(env.APP_WORLD) {
                     //sh 'mvn -f pom.xml clean install'
                 sh 'mvn -B -DskipTests clean package'
-                //}
+                }
             }
         }
         stage('Test') {
