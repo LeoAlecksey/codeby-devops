@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir(env.APP_WORLD) {
-                    sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
+                    //sh 'mvn -f /root/workspace/codeby_lesson26/Hellow-Devops/pom.xml clean install'
                     sh 'mvn -B -DskipTests clean package'
                 }
             }
