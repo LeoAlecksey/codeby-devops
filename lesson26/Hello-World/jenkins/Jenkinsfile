@@ -1,6 +1,5 @@
 pipeline {
-    agent { 
-        node { label 'maven' } }
+    agent any
     environment {
         APP_WORLD = "lesson26/Hello-World"
     }
