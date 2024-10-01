@@ -44,7 +44,15 @@ pipeline {
                                     junit '**/target/surefire-reports/*.xml'
                                 }
                             }
-                        } 
+                        }
+                        stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            }
+                        }    
                         stage ('Deliver') {
                             steps {
                                 //sh './jenkins/scripts/deliver.sh'
@@ -76,6 +84,14 @@ pipeline {
                                 }
                             }
                         }
+                        stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_JENS) {
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            }
+                        }    
                         stage ('Deliver') {
                             steps {
                                 //sh './jenkins/scripts/deliver.sh'
@@ -110,9 +126,8 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_WORLD) {
-                                    withSonarQubeEnv(credentialsId:'sonar', installationName: 'SonarQube') {
-                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
-                                    }
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
                                 }
                             }
                         }    
