@@ -48,6 +48,15 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_DEVOPS) {
+                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
                                     sleep 60
                                     waitForQualityGate abortPipeline: true
                                 }
@@ -87,6 +96,15 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_JENS) {
+                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
+                            steps {
+                                dir(env.APP_JENS) {
                                     sleep 60
                                     waitForQualityGate abortPipeline: true
                                 }
@@ -124,6 +142,15 @@ pipeline {
                             }
                         }
                         stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_WORLD) {
+                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
                             steps {
                                 dir(env.APP_WORLD) {
                                     sleep 60
