@@ -48,7 +48,7 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_DEVOPS) {
-                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                    withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
                                         sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
                                     }
                                 }
@@ -96,7 +96,7 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_JENS) {
-                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                    withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
                                         sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
                                     }
                                 }
@@ -144,7 +144,7 @@ pipeline {
                         stage('SonarQube Analysis') {
                             steps {
                                 dir(env.APP_WORLD) {
-                                    waitSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
+                                    withSonarQubeEnv(credentialsId: 'sonar', installationName: 'SonarQube') {
                                         sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
                                     }
                                 }
