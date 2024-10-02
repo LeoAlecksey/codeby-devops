@@ -16,4 +16,4 @@ jobs:
       with:
         java-version: 17
     - name: Build project with Maven
-      run: mvn -B package --file ~/Hello-World/pom.xml
+      run: mvn -B package --file pom.xml
