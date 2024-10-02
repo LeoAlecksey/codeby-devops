@@ -16,4 +16,4 @@ jobs:
       with:
         java-version: 17
     - name: Build project with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file lesson28/pom.xml
