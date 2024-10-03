@@ -15,5 +15,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
-    - name: Build project with Maven
-      run: mvn -B package --file lesson28/pom.xml
+    - name: Build project World
+      run: mvn -B package --file lesson28/Hello-World/pom.xml
+    - name: Build project Jenkins
+      run: mvn -B package --file lesson28/Hello-Jenkins/pom.xml
+    - name: Build project Devops
+      run: mvn -B package --file lesson28/Hello-Devops/pom.xml
