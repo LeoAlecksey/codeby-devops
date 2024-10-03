@@ -8,7 +8,7 @@ on:
       - 'lesson28/Hello-*/**/*.java'
 jobs:
   build_world:
-    if: github.repository == 'coedeby-devops/lesson28/Hello-World'
+    if: github.repository == 'codeby-devops/lesson28/Hello-World'
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
       run: mvn -B package --file lesson28/Hello-World/pom.xml
 
   build_Jenkins:
-    if: github.repository == 'coedeby-devops/lesson28/Hello-Jenkins'
+    if: github.repository == 'codeby-devops/lesson28/Hello-Jenkins'
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
       run: mvn -B package --file lesson28/Hello-Jenkins/pom.xml    
   
   build_Devops:
-    if: github.repository == 'coedeby-devops/lesson28/Hello-Jenkins'
+    if: github.repository == 'codeby-devops/lesson28/Hello-Jenkins'
     runs-on: ubuntu-latest
 
     steps:
