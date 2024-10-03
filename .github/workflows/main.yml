@@ -8,9 +8,7 @@ on:
       - 'lesson28/Hello-*/**/*.java'
 jobs:
   build_world:
-    if: github.repository == 'codeby-devops/lesson28/Hello-World'
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -21,7 +19,6 @@ jobs:
       run: mvn -B package --file lesson28/Hello-World/pom.xml
 
   build_Jenkins:
-    if: github.repository == 'codeby-devops/lesson28/Hello-Jenkins'
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +31,6 @@ jobs:
       run: mvn -B package --file lesson28/Hello-Jenkins/pom.xml    
   
   build_Devops:
-    if: github.repository == 'codeby-devops/lesson28/Hello-Jenkins'
     runs-on: ubuntu-latest
 
     steps:
