@@ -122,4 +122,4 @@ jobs:
       - name: Build Container image World
         run: docker build -t ${{ secrets.DOCKER_REPO }}:world lesson28/Hello-World/
       - name: Publish Docker image World
-        run: docker push ${{ secrets.DOCKER_REPO }}
+        run: docker push ${{ secrets.DOCKER_REPO }}:world
