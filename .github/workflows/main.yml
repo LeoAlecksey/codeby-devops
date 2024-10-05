@@ -66,3 +66,47 @@ jobs:
     - name: Build project World
       run: mvn -B package --file lesson28/Hello-Devops/pom.xml       
 
+  publish-job_World:
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - run: mvn -B package --file lesson28/Hello-World/pom.xml -DskipTests
+      - run: mkdir staging1 && cp target/*.jar staging1
+      - uses: actions/upload-artifact@v1
+        with:
+          name: World-pack
+          path: staging1
+
+  publish-job_Jenkins:
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - run: mvn -B package --file lesson28/Hello-Jenkins/pom.xml -DskipTests
+      - run: mkdir staging2 && cp target/*.jar staging2
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Jenkins-pack
+          path: staging2
+
+  publish-job_Devops:
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - run: mvn -B package --file lesson28/Hello-Devops/pom.xml -DskipTests
+      - run: mkdir staging3 && cp target/*.jar staging3
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Devops-pack
+          path: staging3
