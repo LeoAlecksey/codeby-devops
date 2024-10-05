@@ -120,6 +120,6 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_NAME }} -p ${{ secrets.DOCKER_PASS }}
       - name: Build Container image World
-        run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:world lesson28/Hello-World/
       - name: Publish Docker image World
         run: docker push ${{ secrets.DOCKER_REPO }}
