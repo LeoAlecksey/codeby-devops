@@ -1,0 +1,173 @@
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.9.9'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    
+    environment {
+        GITHUB_URL = "https://github.com/LeoAlecksey/codeby-devops.git"
+        GIT_CRED = "GitHub"
+        SONAR_CRED = "sonar"
+        BRANCH = "lesson27"
+        APP_DEVOPS = "lesson27/Hello-Devops"
+        APP_JENS = "lesson27/Hello-Jenkins"
+        APP_WORLD = "lesson27/Hello-World"
+    }
+    
+    stages {
+        stage('Check out') {
+            steps {
+                git branch: env.BRANCH, changelog: false, credentialsId: env.GIT_CRED, poll: false, url: env.GITHUB_URL
+            }
+        }
+        stage('start') {
+            parallel {
+                stage('DEVOPS') {
+                    when { changeset "${env.APP_DEVOPS}/**/*.java" }
+                    stages {
+                        stage ('Build') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
+                                    sh 'mvn -B -DskipTests clean package'
+                                }
+                            }
+                        }       
+                        stage ('Test') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
+                                    sh 'mvn test'
+                                }
+                            }
+                            post {
+                                always {
+                                    junit '**/target/surefire-reports/*.xml'
+                                }
+                            }
+                        }
+                        stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
+                                    withSonarQubeEnv(credentialsId: env.SONAR_CRED, installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
+                            steps {
+                                dir(env.APP_DEVOPS) {
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            }
+                        }    
+                        stage ('Deliver') {
+                            steps {
+                                //sh './jenkins/scripts/deliver.sh'
+                                echo "deliver ok"
+                            }
+                        }      
+                    }
+                }
+                stage('JENS') {
+                    when { changeset "${env.APP_JENS}/**/*.java" }
+                    stages {
+                        stage ('Build') {
+                            steps {
+                                dir(env.APP_JENS) {
+                                    sh 'mvn -B -DskipTests clean package'
+                                }
+                            }
+                        }       
+                        stage ('Test') {
+                            steps {
+                                dir(env.APP_JENS) {
+                                    sh 'mvn test'
+                                }
+                            }
+                            post {
+                                always {
+                                    junit '**/target/surefire-reports/*.xml'
+                                    archiveArtifacts '**/target/*.jar'
+                                }
+                            }
+                        }
+                        stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_JENS) {
+                                    withSonarQubeEnv(credentialsId: env.SONAR_CRED, installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
+                            steps {
+                                dir(env.APP_JENS) {
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            }
+                        }    
+                        stage ('Deliver') {
+                            steps {
+                                //sh './jenkins/scripts/deliver.sh'
+                                echo "deliver ok"
+                            }
+                        }        
+                    }
+                }
+                stage('WORLD') {
+                    when { changeset "${env.APP_WORLD}/**/*.java" }
+                    stages {
+                        stage ('Build') {
+                            steps {
+                                dir(env.APP_WORLD) {
+                                    sh 'mvn -B -DskipTests clean package'
+                                }
+                            }
+                        }       
+                        stage ('Test') {
+                            steps {
+                                dir(env.APP_WORLD) {
+                                    sh 'mvn test'
+                                }
+                            }
+                            post {
+                                always {
+                                    junit '**/target/surefire-reports/*.xml'
+                                    archiveArtifacts '**/target/*.jar'
+                                }
+                            }
+                        }
+                        stage('SonarQube Analysis') {
+                            steps {
+                                dir(env.APP_WORLD) {
+                                    withSonarQubeEnv(credentialsId: env.SONAR_CRED, installationName: 'SonarQube') {
+                                        sh "mvn clean verify sonar:sonar -Dsonar.projectKey=maven -Dsonar.projectName='maven'"
+                                    }
+                                }
+                            }
+                        }    
+                        stage('SonarQube Quality Gate') {
+                            steps {
+                                dir(env.APP_WORLD) {
+                                    sleep 60
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            }
+                        }    
+                        stage ('Deliver') {
+                            steps {
+                                //sh './jenkins/scripts/deliver.sh'
+                                echo "deliver ok"
+                            }
+                        }       
+                    }
+                }
+            }   
+        }
+    }
+}   
