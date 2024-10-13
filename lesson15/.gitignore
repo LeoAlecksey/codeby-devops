@@ -1,0 +1,9 @@
+.terraform/*
+alex.json
+*.txt
+.terraformrc
+.terraform.lock.hcl
+terraform.rc
+terraform.tfstate
+yc_rsa
+yc_rsa.pub
